@@ -12,7 +12,7 @@ using ShopNShop.Models;
 namespace ShopNShop.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class CategoriesController : Controller
+    public class CategoriesController : Controller 
     {
         private readonly ApplicationDbContext _context;
 
@@ -53,29 +53,29 @@ namespace ShopNShop.Controllers
             return View();
         }
 
-        // POST: Categories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                try
                 {
                     _context.Add(category);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-                return View(category);
+                catch (Exception ex)
+                {
+                    // Log or handle the exception appropriately
+                    ModelState.AddModelError("", "An error occurred while saving the category.");
+                    return View(category);
+                }
             }
-            catch (Exception ex)
-            {
-                // Log or handle the exception appropriately
-                ModelState.AddModelError("", "An error occurred while saving the category.");
-                return View(category);
-            }
+
+            
+            return View(category);
         }
 
 
@@ -95,9 +95,7 @@ namespace ShopNShop.Controllers
             return View(category);
         }
 
-        // POST: Categories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Category category)

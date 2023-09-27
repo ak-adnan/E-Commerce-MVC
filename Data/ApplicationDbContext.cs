@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using ShopNShop.Models;
+using ShopNShop.Areas.Identity;
 
 namespace ShopNShop.Data
 {

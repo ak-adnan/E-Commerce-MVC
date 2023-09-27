@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; // Admin layout
+}
+
+<h1>Welcome, Admin</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- Add statistics or charts here -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <a class="btn btn-primary" href="@Url.Action("Index", "Categories")">Manage Categories</a>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-primary" href="@Url.Action("Index", "Products")">Manage Products</a>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-primary" href="@Url.Action("Index", "Orders")">Manage Orders</a>
+    </div>
+    <!-- Add more links for other functionalities -->
+</div>
