@@ -58,23 +58,10 @@ namespace ShopNShop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Add(category);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (Exception ex)
-                {
-                    // Log or handle the exception appropriately
-                    ModelState.AddModelError("", "An error occurred while saving the category.");
-                    return View(category);
-                }
-            }
+            _context.Add(category);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
 
-            
             return View(category);
         }
 

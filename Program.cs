@@ -42,11 +42,11 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "admin@gmail.com",
-    pattern: "admin/{controller=Admin}/{action=Index}/{id?}",
-    defaults: new { area = "Admin" }
-);
+//app.MapControllerRoute(
+//    name: "admin@gmail.com",
+//    pattern: "admin/{controller=Admin}/{action=Index}/{id?}",
+//    defaults: new { area = "Admin" }
+//);
 
 app.MapControllerRoute(
     name: "default",
