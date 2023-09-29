@@ -13,10 +13,6 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\adnan\\OneDrive\\Desktop\\ASP.NET\\Internship Project\\SnS\\ShopNShop\\ShopNShop\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
-    },
-    {
       "Id": "C:\\Users\\adnan\\OneDrive\\Desktop\\ASP.NET\\Internship Project\\SnS\\ShopNShop\\ShopNShop\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
