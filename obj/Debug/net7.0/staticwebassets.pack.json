@@ -9,8 +9,16 @@
       "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
     },
     {
+      "Id": "C:\\Users\\adnan\\OneDrive\\Desktop\\ASP.NET\\Internship Project\\SnS\\ShopNShop\\ShopNShop\\wwwroot\\css\\custom.css",
+      "PackagePath": "staticwebassets\\css\\custom.css"
+    },
+    {
       "Id": "C:\\Users\\adnan\\OneDrive\\Desktop\\ASP.NET\\Internship Project\\SnS\\ShopNShop\\ShopNShop\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive\\Desktop\\ASP.NET\\Internship Project\\SnS\\ShopNShop\\ShopNShop\\wwwroot\\images\\logo1.png",
+      "PackagePath": "staticwebassets\\images\\logo1.png"
     },
     {
       "Id": "C:\\Users\\adnan\\OneDrive\\Desktop\\ASP.NET\\Internship Project\\SnS\\ShopNShop\\ShopNShop\\wwwroot\\lib\\bootstrap\\LICENSE",

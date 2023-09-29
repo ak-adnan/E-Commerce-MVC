@@ -1,0 +1,11 @@
+﻿body {
+}
+.fixed-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px; /* Adjust this value to control the spacing */
+}

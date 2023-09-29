@@ -43,14 +43,31 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
+
+// Add a route for the admin area
+app.MapControllerRoute(
     name: "admin",
-    pattern: "Admin/{controller=Admin}/{action=Index}/{id?}",
+    pattern: "admin/{controller=Admin}/{action=Index}/{id?}",
     defaults: new { area = "Admin" }
 );
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+// Set up a custom route for the admin dashboard
+app.Map("/admin", adminApp =>
+{
+    adminApp.UseRouting();
+    adminApp.UseAuthorization();
+    adminApp.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllerRoute(
+            name: "admin-dashboard",
+            pattern: "{controller=Admin}/{action=Index}/{id?}",
+            defaults: new { area = "Admin" }
+        );
+    });
+});
 app.MapRazorPages();
 
 app.Run();
