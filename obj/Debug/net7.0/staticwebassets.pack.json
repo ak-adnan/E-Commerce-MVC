@@ -17,8 +17,20 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\adnan\\OneDrive\\Desktop\\ASP.NET\\Internship Project\\SnS\\ShopNShop\\ShopNShop\\wwwroot\\images\\logo1.png",
-      "PackagePath": "staticwebassets\\images\\logo1.png"
+      "Id": "C:\\Users\\adnan\\OneDrive\\Desktop\\ASP.NET\\Internship Project\\SnS\\ShopNShop\\ShopNShop\\wwwroot\\images\\c1.jpg",
+      "PackagePath": "staticwebassets\\images\\c1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive\\Desktop\\ASP.NET\\Internship Project\\SnS\\ShopNShop\\ShopNShop\\wwwroot\\images\\c2.jpg",
+      "PackagePath": "staticwebassets\\images\\c2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive\\Desktop\\ASP.NET\\Internship Project\\SnS\\ShopNShop\\ShopNShop\\wwwroot\\images\\c3.jpg",
+      "PackagePath": "staticwebassets\\images\\c3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive\\Desktop\\ASP.NET\\Internship Project\\SnS\\ShopNShop\\ShopNShop\\wwwroot\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo.png"
     },
     {
       "Id": "C:\\Users\\adnan\\OneDrive\\Desktop\\ASP.NET\\Internship Project\\SnS\\ShopNShop\\ShopNShop\\wwwroot\\lib\\bootstrap\\LICENSE",

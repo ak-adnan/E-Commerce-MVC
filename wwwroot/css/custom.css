@@ -9,22 +9,15 @@
     margin-top: 20px;
     margin-bottom: 10px; /* Adjust this value to control the spacing */
 }
-/* Shaking Animation */
-@keyframes shake {
-    0%, 100% {
-        transform: translateX(0);
-    }
 
-    10%, 30%, 50%, 70%, 90% {
-        transform: translateX(-5px);
-    }
-
-    20%, 40%, 60%, 80% {
-        transform: translateX(5px);
-    }
+.cart-icon {
+    font-size:25px; /* Adjust the font size as needed */
+    color: white; /* Set the color to white */
+    margin-left: 800px; /* Adjust the rSight margin to shift it to the right */
+}
+#cartItemCount {
+    font-size: 15px;
+    color: lavenderblush;
+    margin-left: 3px;
 }
 
-/* Apply the animation to the cart icon */
-#cart-icon {
-    animation: shake 0.4s infinite;
-}

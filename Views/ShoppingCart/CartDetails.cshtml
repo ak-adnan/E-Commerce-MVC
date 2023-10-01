@@ -1,0 +1,120 @@
+﻿@model List<CartDetails>
+
+<h1 class=" mt-3 mb-4"  >Your Cart</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <!-- Cart Details -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Unit Price (tk)</th>
+                    <th>Quantity </th>
+                    <th>Total Price(tk)</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><img src="@item.Product.ImageUrl" alt="@item.Product.Name" style="max-width: 65px;" />@item.Product.Name</td>
+                        <td data-unitprice="@item.Product.Price">@item.Product.Price</td>
+                        <td>
+                            <!-- Plus and minus icons for quantity -->
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-primary" onclick="decreaseQuantity(@item.CartDetailsId)">
+                                    <i class="bi bi-dash-lg"></i>
+                                </button>
+                                <span id="quantity_@item.CartDetailsId" class="btn btn-light quantity">@item.Quantity</span>
+                                <button type="button" class="btn btn-primary" onclick="increaseQuantity(@item.CartDetailsId)">
+                                    <i class="bi bi-plus-lg"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td class="total-price" id="totalPrice_@item.CartDetailsId" data-cartdetailsid="@item.CartDetailsId">0.00</td>
+                        <td>
+                            <!-- Add a button to remove the item -->
+                            <i class="bi bi-trash-fill" onclick="removeItem(@item.CartDetailsId)" style="font-size:15px;color:red;"></i><i></i>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-md-4">
+        <!-- Cart Summary -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Cart Summary</h5>
+                <ul class="list-group" id="cartSummary">
+                    <!-- List of items in the cart with names, images, and total prices -->
+                </ul>
+                <hr>
+                <p class="card-text">Total: <span id="totalPriceSpan">$0.00</span></p>
+                <!-- Checkout buttons -->
+                <button class="btn btn-success">Checkout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+
+        function removeItem(cartDetailsId) {
+            $.ajax({
+                url: '/ShoppingCart/RemoveFromCart',
+                method: 'POST',
+                data: { cartDetailsId: cartDetailsId },
+                success: function () {
+                    // Reload the cart page or update the cart items in real-time
+                    location.reload();
+                },
+                error: function () {
+                    alert('Failed to remove the product from the cart');
+                }
+            });
+        }
+
+        function decreaseQuantity(cartDetailsId) {
+            var quantityElement = $('#quantity_' + cartDetailsId);
+            var currentQuantity = parseInt(quantityElement.text(), 10);
+            if (currentQuantity > 1) {
+                var newQuantity = currentQuantity - 1;
+                quantityElement.text(newQuantity);
+                updateTotalPrice(cartDetailsId, newQuantity);
+            }
+        }
+
+        function increaseQuantity(cartDetailsId) {
+            var quantityElement = $('#quantity_' + cartDetailsId);
+            var currentQuantity = parseInt(quantityElement.text(), 10);
+            var newQuantity = currentQuantity + 1;
+            quantityElement.text(newQuantity);
+            updateTotalPrice(cartDetailsId, newQuantity);
+        }
+
+        function updateTotalPrice(cartDetailsId, newQuantity) {
+            var unitPrice = parseFloat($('#quantity_' + cartDetailsId).closest('tr').find('td[data-unitprice]').data('unitprice'));
+            var totalPriceElement = $('#totalPrice_' + cartDetailsId);
+            var totalPrice = unitPrice * newQuantity;
+            totalPriceElement.text(totalPrice.toFixed(2));
+        }
+
+        $(document).ready(function () {
+            // Call the updateTotalPrice function for each item initially
+            $('.total-price').each(function () {
+                var cartDetailsId = $(this).data('cartdetailsid');
+                var quantity = parseInt($('#quantity_' + cartDetailsId).text(), 10);
+                updateTotalPrice(cartDetailsId, quantity);
+            });
+        });
+
+
+    </script>
+}

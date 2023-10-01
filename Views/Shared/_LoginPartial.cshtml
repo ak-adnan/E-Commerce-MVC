@@ -6,22 +6,36 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
-            <a class="nav-link " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                Hello @User.Identity?.Name!
-                @if (User.IsInRole("Admin"))
-                {
-                    <span>
-                        (Admin)
-                    </span>
-                }
+        <li class="nav-item dropdown " style="margin-right:100px">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-person-square" style=" font-size:25px;color: white;"></i>
             </a>
+            <div class="dropdown-menu ">
+                <a class="dropdown-item  ">
+                    <a class="nav-link  text-primary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                    Hello, @User.Identity?.Name!
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <span>
+                                (Admin)
+                            </span>
+                        }
+                </a>
+                </a>
+
+                <a class="dropdown-item" href="#"><strong>My Order</strong></a>
+
+                <div class="dropdown-divider"></div>
+
+                <a class="dropdown-item" href="#">
+                    <form class="form-inline  " asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" class="nav-link btn btn-link text-danger " style="margin-left:20px"> <i class="bi bi-box-arrow-right">   </i> <strong>Logout</strong></button>
+                    </form>
+                </a>
+            </div>
         </li>
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-            </form>
-        </li>
+
+
     }
     else
     {
