@@ -2,13 +2,12 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; // Admin layout
 }
 
-<h1>Index</h1>
+<h2>Product list  <a asp-action="Create"><i class="bi bi-plus-circle"></i></a></h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -21,7 +20,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th>
+            <th >
                 @Html.DisplayNameFor(model => model.ImageUrl)
             </th>
             <th>
@@ -45,7 +44,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
+            <td class="image-url-column" max-width: 50px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;>
                 @Html.DisplayFor(modelItem => item.ImageUrl)
             </td>
             <td>
@@ -55,9 +57,9 @@
                 @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square" style="font-size:18px;" ></i></a>
+                    <a asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-info-square" style="font-size:18px;"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill" style="font-size:18px;color:red;"></i></a>
             </td>
         </tr>
 }

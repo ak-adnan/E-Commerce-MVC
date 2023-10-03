@@ -47,13 +47,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
 
-// Add a route for the admin area
-app.MapControllerRoute(
-    name: "admin",
-    pattern: "admin/{controller=Admin}/{action=Index}/{id?}",
-    defaults: new { area = "Admin" }
-);
-
 // Set up a custom route for the admin dashboard
 app.Map("/admin", adminApp =>
 {
@@ -69,5 +62,19 @@ app.Map("/admin", adminApp =>
     });
 });
 app.MapRazorPages();
+
+// Add a custom middleware to handle admin redirection
+app.Use(async (context, next) =>
+{
+    // Check if the user is authenticated and has the "Admin" role
+    if (context.Request.Path.StartsWithSegments("/admin") && !context.User.Identity.IsAuthenticated)
+    {
+        // Redirect admin users to the admin dashboard
+        context.Response.Redirect("/admin");
+        return;
+    }
+
+    await next();
+});
 
 app.Run();

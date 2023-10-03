@@ -21,3 +21,24 @@
     margin-left: 3px;
 }
 
+.image-url-column {
+    max-width: 200px; /* Adjust the max-width as per your design */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*.banner {
+    background-color: #3498db;  Background color 
+    color: #fff;  
+    Text color: black; 
+    text-align: center;
+    
+
+}
+
+    .banner h2 {
+        font-size: 36px;  Font size for the heading 
+        margin: 0;  Remove any default margin 
+    }
+*/
