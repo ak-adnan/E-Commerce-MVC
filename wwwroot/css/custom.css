@@ -42,3 +42,19 @@
         margin: 0;  Remove any default margin 
     }
 */
+.custom-card {
+    width: 180px;
+    height: 188px;
+    border-radius: 10px; /* Add rounded border */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
+.card-hover:hover h5.card-title {
+    color: blue;
+}
+/* Sticky Footer */
+#sticky-footer {
+    display: flex;
+    flex-direction: column;
+    min-height: 10vh;
+}
+

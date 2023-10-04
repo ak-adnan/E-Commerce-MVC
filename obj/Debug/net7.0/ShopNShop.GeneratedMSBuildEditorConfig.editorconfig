@@ -200,12 +200,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmllc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/adnan/OneDrive/Desktop/ASP.NET/Internship Project/SnS/ShopNShop/ShopNShop/Views/Categories/ProductsByCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmllc1xQcm9kdWN0c0J5Q2F0ZWdvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/adnan/OneDrive/Desktop/ASP.NET/Internship Project/SnS/ShopNShop/ShopNShop/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/adnan/OneDrive/Desktop/ASP.NET/Internship Project/SnS/ShopNShop/ShopNShop/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adnan/OneDrive/Desktop/ASP.NET/Internship Project/SnS/ShopNShop/ShopNShop/Views/MyOrder/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXlPcmRlclxFcnJvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adnan/OneDrive/Desktop/ASP.NET/Internship Project/SnS/ShopNShop/ShopNShop/Views/MyOrder/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXlPcmRlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/adnan/OneDrive/Desktop/ASP.NET/Internship Project/SnS/ShopNShop/ShopNShop/Views/Products/Create.cshtml]

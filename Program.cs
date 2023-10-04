@@ -42,6 +42,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"
@@ -61,6 +62,8 @@ app.Map("/admin", adminApp =>
         );
     });
 });
+
+
 app.MapRazorPages();
 
 // Add a custom middleware to handle admin redirection

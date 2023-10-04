@@ -1,0 +1,33 @@
+﻿@model List<ShopNShop.Models.Product>
+
+@{
+    ViewData["Title"] = "Products by Category";
+}
+
+<h2>Products in Category 3</h2>
+
+<div class="w-100 mt-4 d-flex flex-wrap">
+    @foreach (var product in Model)
+    {
+        <div class="card mx-2 mb-4" style="width: 19rem;">
+            <!-- Apply fixed width and height to the image -->
+            <div class="text-center">
+                <img src="@product.ImageUrl" class="card-img-top mt-2" alt="@product.Name" style="width: 250px; height: 250px;">
+            </div>
+            <div class="card-body">
+
+                <div class="mb-5">
+                    <h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;">@product.Name</h5>
+                    <p class="card-text ">
+                    <p>Category: @product.Category.Name</p>
+                    <p>Availability: @product.StockQuantity</p>
+                    <p>Price(tk): @product.Price</p>
+                    </p>
+                </div>
+                <div class="fixed-bottom">
+                    <button onclick="addToCart(@product.Id, 1);" class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

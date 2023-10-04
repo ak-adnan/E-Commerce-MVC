@@ -49,14 +49,17 @@
         <!-- Cart Summary -->
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title mb-4">Cart Summary</h5>
+                <h5 class="card-title mb-4" style="text-align:center">Cart Summary</h5>
                 <ul class="list-group" id="cartSummary">
                     <!-- List of items in the cart with names, images, and total prices -->
                 </ul>
                 <hr>
-                <p class="card-text">Total: <span id="totalPriceSpan">$0.00</span></p>
+                <p class="card-text">Total Payment(tk): <strong><span id="totalPriceSpan" style="margin-left:160px">$0.00</span></p></strong>
+
                 <!-- Checkout buttons -->
-                <button class="btn btn-success">Checkout</button>
+                << <a class="" href="/Home/Index" style="color: #FD5602"> Continue Shopping </a> <span>
+                    <button class="btn btn-success" id="placeOrderBtn" style="margin-left:75px;">Place Order</button>
+                </span>
             </div>
         </div>
     </div>
@@ -104,6 +107,40 @@
             var totalPriceElement = $('#totalPrice_' + cartDetailsId);
             var totalPrice = unitPrice * newQuantity;
             totalPriceElement.text(totalPrice.toFixed(2));
+
+            // Update the cart summary when the total price changes
+            updateCartSummary();
+        }
+
+        // Function to update the cart summary with items and quantities
+        function updateCartSummary() {
+            var cartSummary = '';
+
+            // Iterate through all items in the cart
+            $('.total-price').each(function () {
+                var itemName = $(this).closest('tr').find('td:first').text();
+                var totalPrice = parseFloat($(this).text());
+                cartSummary += '<li class="list-group-item" style=" font-size: 15px" >' + itemName + ' (Total Price: ' + totalPrice + ' tk)</li>';
+            });
+
+            // Update the cart summary displayed in the ul element
+            $('#cartSummary').html(cartSummary);
+
+            // Update the total cost when the cart summary changes
+            updateTotalCost();
+        }
+
+        // Function to calculate and update the total cost
+        function updateTotalCost() {
+            var totalCost = 0;
+
+            // Iterate through all items in the cart
+            $('.total-price').each(function () {
+                totalCost += parseFloat($(this).text());
+            });
+
+            // Update the total cost displayed in the span
+            $('#totalPriceSpan').text(totalCost);
         }
 
         $(document).ready(function () {
@@ -112,6 +149,39 @@
                 var cartDetailsId = $(this).data('cartdetailsid');
                 var quantity = parseInt($('#quantity_' + cartDetailsId).text(), 10);
                 updateTotalPrice(cartDetailsId, quantity);
+            });
+        });
+
+        // Initialize the cart summary when the page loads
+        updateCartSummary();
+.
+
+            // Handle the "Place Order" button click event
+            $('#placeOrderBtn').on('click', function () {
+                // Create an order object with necessary data
+                var orderData = {
+                    userId: 1, // Replace with the actual user ID
+                    orderDate: null, // Will be set on the server
+                    orderStatusId: 1, // Replace with the appropriate order status ID
+                    totalAmount: parseFloat($('#totalPriceSpan').text().replace('$tk', '')), // Parse the total amount
+                    /orderDetails: [] // Add order details if needed
+                };
+
+                // Send a POST request to the server to place the order
+                $.ajax({
+                    url: '/Myorder/PlaceOrders',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(orderData),
+                    success: function (orderId) {
+                        // Handle success, e.g., redirect to a thank-you page
+                        alert('Order placed successfully. Order ID: ' + orderId);
+                        window.location.href = '/Order/ThankYou/' + orderId;
+                    },
+                    error: function () {
+                        alert('Failed to place the order.');
+                    }
+                });
             });
         });
 

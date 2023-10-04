@@ -145,5 +145,43 @@ namespace ShopNShop.Controllers
         {
           return (_context.Products?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+
+        //// GET: Products/ProductsByCategory/3
+        //public async Task<IActionResult> ProductsByCategory()
+        //{
+
+        //    int categoryId = 3;
+
+        //var productsByCategory = await _context.Products
+        //    .Where(p => p.CategoryId == categoryId)
+        //    .Include(p => p.Category)
+        //    .ToListAsync();
+
+        //    return View("Index", productsByCategory); // Reuse the "Index" view to display the filtered products
+        //}
+
+        //// Your other actions for Index, Details, and other functionalities...
+
+        //// GET: Products/Details/5
+        //public async Task<IActionResult> ProdDetails(int? id)
+        //{
+        //    if (id == null || _context.Products == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var product = await _context.Products
+        //        .Include(p => p.Category)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(product);
+        //}
+
+
     }
 }
