@@ -51,7 +51,7 @@
             <div class="card-body">
                 <h5 class="card-title mb-4" style="text-align:center">Cart Summary</h5>
                 <ul class="list-group" id="cartSummary">
-                    <!-- List of items in the cart with names, images, and total prices -->
+                    
                 </ul>
                 <hr>
                 <p class="card-text">Total Payment(tk): <strong><span id="totalPriceSpan" style="margin-left:160px">$0.00</span></p></strong>
@@ -67,6 +67,7 @@
 
 
 @section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
 
         function removeItem(cartDetailsId) {
@@ -75,7 +76,7 @@
                 method: 'POST',
                 data: { cartDetailsId: cartDetailsId },
                 success: function () {
-                    // Reload the cart page or update the cart items in real-time
+                    
                     location.reload();
                 },
                 error: function () {
@@ -116,17 +117,15 @@
         function updateCartSummary() {
             var cartSummary = '';
 
-            // Iterate through all items in the cart
             $('.total-price').each(function () {
                 var itemName = $(this).closest('tr').find('td:first').text();
                 var totalPrice = parseFloat($(this).text());
                 cartSummary += '<li class="list-group-item" style=" font-size: 15px" >' + itemName + ' (Total Price: ' + totalPrice + ' tk)</li>';
             });
 
-            // Update the cart summary displayed in the ul element
+            
             $('#cartSummary').html(cartSummary);
 
-            // Update the total cost when the cart summary changes
             updateTotalCost();
         }
 
@@ -134,17 +133,17 @@
         function updateTotalCost() {
             var totalCost = 0;
 
-            // Iterate through all items in the cart
+          
             $('.total-price').each(function () {
                 totalCost += parseFloat($(this).text());
             });
 
-            // Update the total cost displayed in the span
+      
             $('#totalPriceSpan').text(totalCost);
         }
 
         $(document).ready(function () {
-            // Call the updateTotalPrice function for each item initially
+            // Call the updateTotalPrice 
             $('.total-price').each(function () {
                 var cartDetailsId = $(this).data('cartdetailsid');
                 var quantity = parseInt($('#quantity_' + cartDetailsId).text(), 10);
@@ -152,39 +151,48 @@
             });
         });
 
-        // Initialize the cart summary when the page loads
         updateCartSummary();
-.
 
-            // Handle the "Place Order" button click event
-            $('#placeOrderBtn').on('click', function () {
-                // Create an order object with necessary data
-                var orderData = {
-                    userId: 1, // Replace with the actual user ID
-                    orderDate: null, // Will be set on the server
-                    orderStatusId: 1, // Replace with the appropriate order status ID
-                    totalAmount: parseFloat($('#totalPriceSpan').text().replace('$tk', '')), // Parse the total amount
-                    /orderDetails: [] // Add order details if needed
-                };
 
-                // Send a POST request to the server to place the order
-                $.ajax({
-                    url: '/Myorder/PlaceOrders',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(orderData),
-                    success: function (orderId) {
-                        // Handle success, e.g., redirect to a thank-you page
-                        alert('Order placed successfully. Order ID: ' + orderId);
-                        window.location.href = '/Order/ThankYou/' + orderId;
-                    },
-                    error: function () {
-                        alert('Failed to place the order.');
-                    }
-                });
+        //Create Orders
+      
+        $('#placeOrderBtn').on('click', function () {
+           
+            var cartItemIds = [];
+
+            // Create an order object with necessary data
+            var orderData = {
+                //userId: currentUserId,
+                orderDate: new Date(),
+                orderStatusId: 1, 
+                totalAmount: parseFloat($('#totalPriceSpan').text().replace('$', '')), 
+                orderDetails: [] 
+            };
+
+            // Collect cart item IDs for removal
+            $('.total-price').each(function () {
+                var cartDetailsId = $(this).data('cartdetailsid');
+                cartItemIds.push(cartDetailsId);
+            });
+
+            // Send a POST request to the server to place the order and remove cart items
+            $.ajax({
+                url: '/MyOrder/PlaceOrder',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ orderData: orderData, cartItemIds: cartItemIds }),
+                success: function (orderId) {
+                    
+                    alert('Order placed successfully. ');
+                },
+                error: function () {
+                    alert('Failed to place the order.');
+                }
             });
         });
+        
 
 
     </script>
+    
 }

@@ -24,14 +24,11 @@
 @{
     if (!User.IsInRole("Admin"))
     {
-        <!-- Your view content here -->
+        
 
         <form class="d-flex mx-auto mt-4 mb-3">
             <div class="input-group">
-                <input class="form-control border-2 border-primary rounded-pill bg-light text-dark" type="search" placeholder="Search" aria-label="Search">
-                <span class="input-group-text bg-primary border border-primary rounded-pill">
-                    <i class="bi bi-search text-light"></i>
-                </span>
+                <input id="searchInput" class="form-control border-2 border-primary rounded-pill bg-light text-dark" type="search" placeholder="Search" aria-label="Search">
             </div>
         </form>
 
@@ -76,7 +73,7 @@
         </div>
 
 
-        <div class="container mt-4">
+        <div class="container flex flex-wrap mt-4">
             <div class="row">
                 <div class="col-md-12">
                     <div class="d-flex justify-content-between">
@@ -166,7 +163,7 @@
             @foreach (var product in Model)
             {
                 <div class="card mx-2 mb-4" style="width: 19rem;">
-                    <!-- Apply fixed width and height to the image -->
+                   
                     <div class="text-center">
                         <img src="@product.ImageUrl" class="card-img-top mt-2" alt="@product.Name" style="width: 250px; height: 250px;">
                     </div>
@@ -201,22 +198,55 @@
                     method: 'POST',
                     data: { productId: productId, quantity: quantity },
                     success: function () {
-                        // Handle success, e.g., show a success message
+         
                         alert('Product added to the cart');
 
-                        // Update the item count in local storage and in the navbar
+                     
                         const count = getCartItemCountFromLocalStorage() + quantity;
                         updateCartItemCountInLocalStorage(count);
                         updateCartItemCount();
                     },
                     error: function () {
-                        // Handle error, e.g., show an error message
+                        
                         alert('Failed to add the product to the cart');
                     }
                 });
             }
 
+            // Adding serach functionality
+            $(document).ready(function () {
+                
+                var productCard; 
 
+                $('#searchInput').on('keyup', function (e) {
+                    console.log("Key pressed");
+                    var searchQuery = $('#searchInput').val().toLowerCase();
+                    console.log("Search Query: " + searchQuery);
+
+               
+
+          
+                    $('.card').each(function () {
+                        var productName = $(this).find('.card-title').text().toLowerCase();
+                        productCard = $(this); 
+
+                        console.log("Product Name: " + productName);
+                        console.log("Comparison Result: " + productName.includes(searchQuery));
+
+                        if (productName.includes(searchQuery)) {
+                            
+                            productCard.show();
+                        } else {
+                            
+                            productCard.hide();
+                        }
+                    });
+
+       
+                });
+
+
+            });
 
         </script>
         <script src="https://kit.fontawesome.com/e3d8f46d80.js" crossorigin="anonymous"></script>

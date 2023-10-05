@@ -5,12 +5,40 @@
     ViewData["Title"] = "Log in";
 }
 
-<h1>@ViewData["Title"]</h1>
 <div class="row">
-    <div class="col-md-4">
-        <section>
+
+    <div class="col-md-8">
+        <!-- Carousel for Advertisement -->
+        <div id="advertisementCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner  mt-5" style="width: 600px; height: 600px;margin-left:50px">
+                <div class="carousel-item active">
+                    <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/product-social-media-poster-design-template-985b84cec9b14e8f77223d9fe9a4fef9_screen.jpg?ts=1622432196" class="d-block w-100" alt="Advertisement 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/best-selling-product-poster-flyer-design-template-cd0bf142e5651648a3abf525c8ea1df2_screen.jpg?ts=1622118929" class="d-block w-100" alt="Advertisement 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.pinimg.com/736x/c9/e9/9e/c9e99ea9e3618de0319c46ba6ecfa1e2.jpg" class="d-block w-100" alt="Advertisement 3">
+                </div>
+            </div>
+            <!-- Carousel Controls -->
+            <a class="carousel-control-prev" href="#advertisementCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#advertisementCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+
+
+    </div>
+
+    <div class="col-md-4" style="margin-top:60px">
+        <section class="mt-5">
             <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
+                <h2 class="mt-5" style="text-align:center"> Sign in to your account</h2>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-floating mb-3">
@@ -32,50 +60,23 @@
                 <div>
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
                 </div>
-                <div>
+                <div class="mt-4" style="text-align:center">
+
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        Don’t have an account? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Join here</a>
                     </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
+
                 </div>
             </form>
+            <!-- Logos for Logging in with Social Media -->
+            <div class="text-center mt-4">
+
+                <a href="#" class="btn btn-outline-secondary"><i class="bi bi-google" style="font-size: 20px; margin-right:5px; color:lightcoral"></i>Google</a>
+                <a href="#" class="btn btn-outline-secondary"> <i class="bi bi-facebook" style="font-size: 20px; margin-right:5px; color:skyblue"></i>Facebook</a>
+                <a href="#" class="btn btn-outline-secondary"> <i class="bi bi-apple" style="font-size: 20px; margin-right:5px"></i>Apple</a>
+            </div>
         </section>
     </div>
-    @* <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div> *@
 </div>
 
 @section Scripts {

@@ -42,31 +42,63 @@ namespace ShopNShop.Controllers
 
             return View(order);
         }
-
         [HttpPost]
-        public async Task<IActionResult> PlaceOrders([FromBody] Order order)
+        [Route("MyOrder/PlaceOrder")] // Corrected route attribute
+        public async Task<IActionResult> PlaceOrder([FromBody] Order orderData)
         {
-            
-            
-                try
-                {
-                    // Save the order to the database
-                    order.OrderDate = DateTime.Now;
-                    _context.Orders.Add(order);
-                    await _context.SaveChangesAsync();
+            // Check if the user is authenticated
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account"); // Redirect to the login page if not authenticated
+            }
 
-                    // Clear the user's cart (you might have a similar method in your ShoppingCartController)
-                    // ClearUserCart(order.UserId);
+            try
+            {
+                string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                    return Ok(order.Id); // Return the order ID or a success response
-                }
-                catch (Exception ex)
+                // Retrieve the user's shopping cart
+                var shoppingCart = await _context.ShoppingCarts
+                    .Include(cart => cart.CartDetails)
+                    .FirstOrDefaultAsync(cart => cart.UserId == userId);
+
+                if (shoppingCart == null || shoppingCart.CartDetails == null || shoppingCart.CartDetails.Count == 0)
                 {
-                    return StatusCode(500, $"Internal server error: {ex.Message}");
+                    return RedirectToAction("CartDetails", "ShoppingCart"); // Redirect to the cart if it's empty
                 }
-         
-            return BadRequest();
+
+                // Create a new order
+                var newOrder = new Order
+                {
+                    UserId = Convert.ToInt32(userId),
+                    OrderDate = DateTime.Now, // Set the order date to the current date and time
+                    OrderStatusId = 1, // Replace with the appropriate order status ID
+                    TotalAmount = shoppingCart.CartDetails.Sum(item => item.Product.Price * item.Quantity),
+                    OrderDetails = shoppingCart.CartDetails.Select(item => new OrderDetails
+                    {
+                        ProductId = item.ProductId,
+                        Quantity = item.Quantity
+                    }).ToList()
+                };
+
+                // Add the new order to the database
+                _context.Orders.Add(newOrder);
+
+                // Clear the user's shopping cart
+                _context.CartDetails.RemoveRange(shoppingCart.CartDetails);
+
+                // Save changes to the database
+                await _context.SaveChangesAsync(); // Ensure that changes are saved to the database
+
+                // Redirect to the user's orders page or display a success message
+                return RedirectToAction("Index", "MyOrder");
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions, e.g., log the error and return an error view
+                return View("Error");
+            }
         }
+
 
 
     }

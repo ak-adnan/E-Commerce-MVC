@@ -28,25 +28,13 @@
     text-overflow: ellipsis;
 }
 
-/*.banner {
-    background-color: #3498db;  Background color 
-    color: #fff;  
-    Text color: black; 
-    text-align: center;
-    
 
-}
-
-    .banner h2 {
-        font-size: 36px;  Font size for the heading 
-        margin: 0;  Remove any default margin 
-    }
-*/
 .custom-card {
     width: 180px;
     height: 188px;
     border-radius: 10px; /* Add rounded border */
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); /* Add shadow */
+ 
 }
 .card-hover:hover h5.card-title {
     color: blue;

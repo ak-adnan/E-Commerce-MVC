@@ -58,7 +58,7 @@ namespace ShopNShop.Controllers
             }
             else
             {
-                // If cart details are null, create a new list and add the item
+               
                 shoppingCart.CartDetails = new List<CartDetails>
         {
             new CartDetails
@@ -71,7 +71,6 @@ namespace ShopNShop.Controllers
 
             _context.SaveChanges();
 
-            // Redirect to the cart view or wherever you want to go after adding to the cart
             return RedirectToAction("CartDetails");
         }
         //cart view-------------------------------------
@@ -79,7 +78,7 @@ namespace ShopNShop.Controllers
         {
             if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Login", "Account"); // Redirect to login if not authenticated
+                return RedirectToAction("Login", "Account"); 
             }
 
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -87,16 +86,16 @@ namespace ShopNShop.Controllers
             // Retrieve the cart items for the user
             var cartItems = _context.ShoppingCarts
                 .Include(cart => cart.CartDetails)
-                .ThenInclude(cd => cd.Product) // Include the associated product
+                .ThenInclude(cd => cd.Product) 
                 .FirstOrDefault(cart => cart.UserId == userId)?
                 .CartDetails;
 
-            return View(cartItems); // Pass the cart items to the view
+            return View(cartItems); 
         }
         // remove from cart function 
         public IActionResult RemoveFromCart(int cartDetailsId)
         {
-            // Find the cart item by cartDetailsId and remove it from the cart
+            
             var cartItem = _context.CartDetails.FirstOrDefault(item => item.CartDetailsId == cartDetailsId);
 
             if (cartItem != null)
